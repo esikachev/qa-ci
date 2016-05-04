@@ -9,7 +9,7 @@ write_tests_conf() {
   OS_TENANT_NAME="admin"
   protocol="http"
   if [ "$SSL" == "true" ]; then
-      protocol="false"
+      protocol="https"
   fi
   OS_AUTH_URL="$protocol://172.18.79.153:5000/v2.0"
   NETWORK="neutron"
