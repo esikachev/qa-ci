@@ -19,8 +19,8 @@ OS_PASSWORD: $OS_PASSWORD
 OS_TENANT_NAME: $OS_TENANT_NAME
 OS_AUTH_URL: $OS_AUTH_URL
 network_type: $NETWORK
-network_public_name: admin_internal_net
-network_private_name: admin_floating_net
+network_public_name: admin_floating_net
+network_private_name: admin_internal_net
 ${image_prefix}_image: $image_name
 cluster_name: $cluster_name
 ci_flavor_id: m1.small
