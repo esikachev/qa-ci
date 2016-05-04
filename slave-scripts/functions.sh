@@ -46,3 +46,9 @@ run_tests() {
   if [ "$STATUS" != "0" ]; then failure "Integration tests have failed"; fi
   popd
 }
+
+failure() {
+  local reason=$1
+  echo "$reason"
+  exit 1
+}
