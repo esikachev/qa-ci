@@ -32,13 +32,14 @@ get_dependency() {
 
 run_tests() {
   local scenario_config=$1
-  local params=$2
+  local plugin=$2
+  params=$(echo $plugin | sed 's/_/ -v /g')
   echo "Integration tests are started"
   export PYTHONUNBUFFERED=1
   
   pushd $SAHARA_TESTS_PATH
   
-  tox -e venv -- sahara-scenario --verbose -V $template_vars_file $params | tee tox.log
+  tox -e venv -- sahara-scenario --verbose -V $template_vars_file -p $params | tee tox.log
   STATUS=$(grep "\ -\ Failed" tox.log | awk '{print $3}')
   if [ "$STATUS" != "0" ]; then failure "Integration tests have failed"; fi
   popd
