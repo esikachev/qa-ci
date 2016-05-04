@@ -1,6 +1,6 @@
 . $FUNCTION_PATH/functions.sh
 
-SAHARA_TESTS_PATH=${1:-$WORKSPACE}
+SAHARA_TESTS_PATH=$WORKSPACE/sahara-tests
 get_dependency "$SAHARA_TESTS_PATH" "openstack/sahara-tests" "master"
 template_vars_file=$WORKSPACE/sahara-tests/template_vars.ini
 
