@@ -2,7 +2,7 @@
     name: ci-config-prep
     builders:
       - shell: |
-            git clone https://git.openstack.org/esikachev/qa-ci
+            git clone https://github.com/esikachev/qa-ci
 
 - publisher:
     name: trigger-cleanup
