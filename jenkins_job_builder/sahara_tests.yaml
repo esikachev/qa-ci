@@ -6,6 +6,11 @@
       - shell: "FUNCTION_PATH=$WORKSPACE/qa-ci/slave-scripts $WORKSPACE/qa-ci/slave-scripts/{project_name}.sh"
     publishers:
       - trigger-cleanup
+    parameters:
+      - string:
+          name: SSL
+          default: False
+          description: SSL is enabled?
 
 - project:
     name: sahara_tests
