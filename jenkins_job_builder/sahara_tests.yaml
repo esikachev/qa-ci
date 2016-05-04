@@ -1,0 +1,20 @@
+- job-template:
+    name: '{lab}-{project_name}-{plugin}'
+    defaults: global
+    builders:
+      - shell: "FUNCTION_PATH=$WORKSPACE/qa-ci/slave-scripts $WORKSPACE/qa-ci/slave-scripts/{project_name}.sh"
+
+- project:
+    name: sahara_tests
+    lab:
+      - '153'
+    project_name:
+      - sahara_tests
+    plugin:
+      - vanilla_2.7.1
+      - spark_1.6.0
+      - ambari_2.3
+      - mapr_5.1.0.mrv2
+      - cdh_5.5.0
+    jobs:
+     - '{lab}-{project_name}-{plugin}'
