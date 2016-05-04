@@ -2,6 +2,7 @@
     name: '{lab}-{project_name}-{plugin}'
     defaults: global
     builders:
+      - ci-config-prep
       - shell: "FUNCTION_PATH=$WORKSPACE/qa-ci/slave-scripts $WORKSPACE/qa-ci/slave-scripts/{project_name}.sh"
 
 - project:
