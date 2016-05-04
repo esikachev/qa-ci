@@ -2,6 +2,8 @@
 
 SAHARA_TESTS_PATH=${1:-$WORKSPACE}
 get_dependency "$SAHARA_TESTS_PATH" "openstack/sahara-tests" "master"
+template_vars_file=$WORKSPACE/sahara-tests/template_vars.ini
+
 
 plugin=$(echo $JOB_NAME | awk -F '-' '{ print $3 }')
 
@@ -30,4 +32,5 @@ esac
 params=$(echo $plugin | sed 's/_/ -v /g')
 
 
-write_tests_conf "$cluster_name" "$template_image_prefix" "$plugin" "-p $params"
+write_tests_conf "$RANDOM" "$template_image_prefix" "$plugin"
+run_tests "$template_vars_file"  "-p $params"
