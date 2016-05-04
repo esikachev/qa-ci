@@ -33,5 +33,5 @@ esac
 
 params=$(echo $plugin | sed 's/_/ -v /g')
 
-write_tests_conf "$RANDOM" "$template_image_prefix" "$plugin"
+write_tests_conf "test" "$template_image_prefix" "$plugin"
 run_tests "$template_vars_file"  "$plugin"
