@@ -31,7 +31,6 @@
                   \n<p>Please use this repository to make changes: <a href=\"https://github.com/esikachev/qa-ci\">https://github.com/esikachev/qa-ci</a></b>\
                  \n<p>This job destroys vms which were not deleted after integration tests"
     disabled: false
-    node: 'master'
 
     builders:
     - shell: |
