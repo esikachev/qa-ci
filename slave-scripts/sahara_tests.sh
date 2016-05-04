@@ -1,3 +1,5 @@
+#!/bin/bash -xe
+
 . $FUNCTION_PATH/functions.sh
 
 export SAHARA_TESTS_PATH=$WORKSPACE/sahara-tests

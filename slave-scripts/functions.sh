@@ -1,3 +1,5 @@
+#!/bin/bash -xe
+
 write_tests_conf() {
   local cluster_name=$1
   local image_prefix=$2
