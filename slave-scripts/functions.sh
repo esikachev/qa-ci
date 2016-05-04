@@ -2,13 +2,10 @@ write_tests_conf() {
   local cluster_name=$1
   local image_prefix=$2
   local image_name=$3
-  lab=$(echo $JOB_NAME | awk -F '-' '{ print $1 }')
-  if [ "$lab" == "153" ]; then
-      OS_USERNAME="admin"
-      OS_PASSWORD="admin"
-      OS_TENANT_NAME="admin"
-      OS_AUTH_URL="http://172.18.79.153:5000/v2.0"
-  fi
+  OS_USERNAME="admin"
+  OS_PASSWORD="admin"
+  OS_TENANT_NAME="admin"
+  OS_AUTH_URL="http://172.18.79.153:5000/v2.0"
   NETWORK="neutron"
 echo "[DEFAULT]
 OS_USERNAME: $OS_USERNAME
