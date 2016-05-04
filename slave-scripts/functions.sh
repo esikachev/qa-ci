@@ -7,7 +7,11 @@ write_tests_conf() {
   OS_USERNAME="admin"
   OS_PASSWORD="admin"
   OS_TENANT_NAME="admin"
-  OS_AUTH_URL="http://172.18.79.153:5000/v2.0"
+  protocol="http"
+  if [ "$SSL" == "true" ]; then
+      protocol="false"
+  fi
+  OS_AUTH_URL="$protocol://172.18.79.153:5000/v2.0"
   NETWORK="neutron"
 echo "[DEFAULT]
 OS_USERNAME: $OS_USERNAME
