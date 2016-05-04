@@ -3,5 +3,3 @@
     builders:
       - shell: |
             git clone https://git.openstack.org/openstack/sahara-ci-config
-            chmod +x check_ci_ancillary_patches.sh
-            ./check_ci_ancillary_patches.sh
