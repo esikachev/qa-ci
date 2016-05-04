@@ -9,7 +9,7 @@
     parameters:
       - string:
           name: SSL
-          default: False
+          default: 'false'
           description: SSL is enabled?
 
 - project:
