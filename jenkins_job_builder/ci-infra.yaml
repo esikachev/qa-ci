@@ -22,16 +22,3 @@
 
     builders:
       - shell:  "jenkins-jobs update jenkins_job_builder"
-
-- job:
-    name: integration-cleanup
-    project-type: freestyle
-    defaults: global
-    description: "<b>This job is managed by Jenkins Job Builder, do not edit it through WebUI.\
-                  \n<p>Please use this repository to make changes: <a href=\"https://github.com/esikachev/qa-ci\">https://github.com/esikachev/qa-ci</a></b>\
-                 \n<p>This job destroys vms which were not deleted after integration tests"
-    disabled: false
-
-    builders:
-    - shell: |
-            rm -rf qa-ci

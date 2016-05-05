@@ -7,7 +7,39 @@
               ssh 172.18.79.150 -l qa 'cd FuelDeployment/mos-components-ci/ && ./delete_vms.sh'
               ssh 172.18.79.150 -l qa 'cd FuelDeployment/mos-components-ci/ && ./launch.sh'
     publishers:
-      - trigger-cleanup
+      - workspace-cleanup:
+          clean-if:
+            - success: true
+            - not-built: true
+            - aborted: true
+
+- job-template:
+    name: '{lab}-prepare_controller'
+    defaults: global
+    builders:
+      - ci-config-prep
+      - shell: |
+              scp $WORKSPACE/qa-ci/slave-scripts/prepare_controller.sh qa@172.18.79.150:
+              ssh 172.18.79.150 -l qa './prepare_controller.sh' 
+    publishers:
+      - workspace-cleanup:
+          clean-if:
+            - success: true
+            - not-built: true
+            - aborted: true
+
+- job-template:
+    name: '{lab}-prepare_images'
+    defaults: global
+    builders:
+      - ci-config-prep
+      - shell: "FUNCTION_PATH=$WORKSPACE/qa-ci/slave-scripts $WORKSPACE/qa-ci/slave-scripts/prepare_images.sh"
+    publishers:
+      - workspace-cleanup:
+          clean-if:
+            - success: true
+            - not-built: true
+            - aborted: true
 
 - project:
     name: deploy_mos
@@ -16,4 +48,5 @@
     mos:
       - '9.0'
     jobs:
-     - '{lab}-{mos}'
+      - '{lab}-{mos}'
+      - '{lab}-prepare_controller'

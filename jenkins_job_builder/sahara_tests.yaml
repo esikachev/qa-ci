@@ -5,7 +5,12 @@
       - ci-config-prep
       - shell: "FUNCTION_PATH=$WORKSPACE/qa-ci/slave-scripts $WORKSPACE/qa-ci/slave-scripts/{project_name}.sh"
     publishers:
-      - trigger-cleanup
+      - workspace-cleanup:
+          clean-if:
+            - success: true
+            - not-built: true
+            - aborted: true
+
     parameters:
       - string:
           name: SSL

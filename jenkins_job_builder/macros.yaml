@@ -3,9 +3,3 @@
     builders:
       - shell: |
             git clone https://github.com/esikachev/qa-ci
-
-- publisher:
-    name: trigger-cleanup
-    publishers:
-      - trigger-parameterized-builds:
-          - project: "integration-cleanup"

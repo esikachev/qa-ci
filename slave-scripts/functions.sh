@@ -56,3 +56,15 @@ failure() {
   echo "$reason"
   exit 1
 }
+
+upload_images() {
+host=$1
+user=$2
+pass=$3
+
+ssh pass -p $pass ssh $host -l $user . openrc && openstack image create vanilla_2.7.1 --file mitaka/sahara-mitaka-vanilla-hadoop-2.7.1-ubuntu.qcow2 --disk-format qcow2 --container-format bare --property '_sahara_tag_2.7.1'='True' --property '_sahara_tag_vanilla'='True' --property '_sahara_username'='ubuntu'
+ssh pass -p $pass ssh $host -l $user . openrc && openstack image create ambari_2.3 --file mitaka/sahara-mitaka-ambari-2.2-centos-6.7.qcow2 --disk-format qcow2 --container-format bare --property '_sahara_tag_2.3'='True' --property '_sahara_tag_ambari'='True' --property '_sahara_username'='cloud-user'
+ssh pass -p $pass ssh $host -l $user . openrc && openstack image create cdh_5.5.0 --file mitaka/sahara-mitaka-cloudera-5.5.0-ubuntu.qcow2 --disk-format qcow2 --container-format bare --property '_sahara_tag_5.5.0'='True' --property '_sahara_tag_cdh'='True' --property '_sahara_username'="ubuntu"
+ssh pass -p $pass ssh $host -l $user . openrc && openstack image create spark_1.6.0 --file mitaka/sahara-mitaka-spark-1.6.0-ubuntu.qcow2 --disk-format qcow2 --container-format bare --property '_sahara_tag_spark'='True' --property '_sahara_tag_1.6.0'='True'  --property '_sahara_username'="ubuntu"
+ssh pass -p $pass ssh $host -l $user . openrc && openstack image create mapr_5.1.0 --file mitaka/sahara-mitaka-mapr-5.1.0-ubuntu.qcow2 --disk-format qcow2 --container-format bare --property '_sahara_tag_mapr'='True' --property '_sahara_tag_5.1.0.mrv2'='True'  --property '_sahara_username'="ubuntu"
+}
