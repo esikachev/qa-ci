@@ -50,3 +50,4 @@
     jobs:
       - '{lab}-{mos}'
       - '{lab}-prepare_controller'
+      - '{lab}-prepare_images'
