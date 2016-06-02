@@ -1,4 +1,4 @@
-controller_ip=`sshpass -p r00tme ssh 10.20.0.2 -l root 'fuel node | grep controller' | awk '{print $9}'`
+controller_ip=`sshpass -p r00tme ssh 10.20.0.2 -l root 'fuel node | grep controller' | awk '{print $10}'`
 
 sshpass -p r00tme ssh 10.20.0.2 -l root "ssh $controller_ip 'iptables -A INPUT -p tcp -m multiport --ports 22 -j ACCEPT'"
 pass_auth_command="sed -i 's/PasswordAuthentication[[:space:]]no/PasswordAuthentication\ yes/g' /etc/ssh/sshd_config"
