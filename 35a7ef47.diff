@@ -1,0 +1,54 @@
+From 35a7ef471e0c53df75c94d09b3ea421a7cb74417 Mon Sep 17 00:00:00 2001
+From: zemuvier <zemuvier@gmail.com>
+Date: Thu, 02 Jun 2016 12:29:01 +0300
+Subject: [PATCH] update deploy_mos
+
+Change-Id: Ib484331e644c6b5a292b2d16ba3c780a86d3992f
+---
+
+diff --git a/jenkins_job_builder/deploy_mos.yaml b/jenkins_job_builder/deploy_mos.yaml
+index 9b03844..226e39e 100644
+--- a/jenkins_job_builder/deploy_mos.yaml
++++ b/jenkins_job_builder/deploy_mos.yaml
+@@ -1,11 +1,8 @@
+ - job-template:
+-    name: '{lab}-{mos}'
+-    defaults: global
++    name: '{lab}-del_vms'
+     builders:
+       - ci-config-prep
+-      - shell: |
+-              ssh 172.18.79.150 -l qa 'cd FuelDeployment/mos-components-ci/ && ./delete_vms.sh'
+-              ssh 172.18.79.150 -l qa 'cd FuelDeployment/mos-components-ci/ && ./launch.sh'
++      - shell: ssh 172.18.79.150 -l qa 'cd FuelDeployment/mos-components-ci/ && ./delete_vms.sh'
+     publishers:
+       - workspace-cleanup:
+           clean-if:
+@@ -13,6 +10,18 @@
+             - not-built: true
+             - aborted: true
+ 
++- job-template:
++    name: '{lab}-launch'
++    builders:
++      - ci-config-prep
++      - shell: ssh 172.18.79.150 -l qa 'cd FuelDeployment/mos-components-ci/ && ./launch.sh'
++    publishers:
++      - workspace-cleanup:
++          clean-if:
++            - success: true
++            - not-built: true
++            - aborted: true
++    
+ - job-template:
+     name: '{lab}-prepare_controller'
+     defaults: global
+@@ -48,6 +57,7 @@
+     mos:
+       - '9.0'
+     jobs:
+-      - '{lab}-{mos}'
++      - '{lab}-del_vms'
++      - '{lab}-launch'
+       - '{lab}-prepare_controller'
+       - '{lab}-prepare_images'
