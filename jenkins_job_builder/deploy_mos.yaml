@@ -1,11 +1,20 @@
 - job-template:
-    name: '{lab}-{mos}'
-    defaults: global
+    name: '{lab}-{mos}-del_vms'
     builders:
       - ci-config-prep
-      - shell: |
-              ssh 172.18.79.150 -l qa 'cd FuelDeployment/mos-components-ci/ && ./delete_vms.sh'
-              ssh 172.18.79.150 -l qa 'cd FuelDeployment/mos-components-ci/ && ./launch.sh'
+      - shell: ssh 172.18.79.150 -l qa 'cd FuelDeployment/mos-components-ci/ && ./delete_vms.sh'
+    publishers:
+      - workspace-cleanup:
+          clean-if:
+            - success: true
+            - not-built: true
+            - aborted: true
+
+- job-template:
+    name: '{lab}-{mos}-deploy'
+    builders:
+      - ci-config-prep
+      - shell: ssh 172.18.79.150 -l qa 'cd FuelDeployment/mos-components-ci/ && ./launch.sh'
     publishers:
       - workspace-cleanup:
           clean-if:
@@ -48,6 +57,7 @@
     mos:
       - '9.0'
     jobs:
-      - '{lab}-{mos}'
+      - '{lab}-{mos}-del_vms'
+      - '{lab}-{mos}-deploy'
       - '{lab}-prepare_controller'
       - '{lab}-prepare_images'
