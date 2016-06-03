@@ -11,7 +11,10 @@
             - not-built: true
             - aborted: true
     triggers:
-      - jobs: '{lab}-{mos}-deploy'
+      - build_result:
+          groups:
+            - jobs:
+              - '{lab}-{mos}-deploy'
 
 - job-template:
     name: '{lab}-{mos}-deploy'
@@ -26,7 +29,10 @@
             - not-built: true
             - aborted: true
     triggers:
-      - jobs: '{lab}-prepare_cotroller'
+      - build_result:
+          groups:
+            - jobs:
+               - '{lab}-prepare_cotroller'
 
 - job-template:
     name: '{lab}-prepare_controller'
