@@ -11,7 +11,14 @@
             - not-built: true
             - aborted: true
     triggers:
+<<<<<<< HEAD
       - jobs: '{lab}-{mos}-deploy'
+=======
+      - build_result:
+          groups:
+            - jobs:
+              - '{lab}-{mos}-deploy'
+>>>>>>> 19aa703... Separate 2 jobs
 
 - job-template:
     name: '{lab}-{mos}-deploy'
@@ -26,7 +33,14 @@
             - not-built: true
             - aborted: true
     triggers:
+<<<<<<< HEAD
       - jobs: '{lab}-prepare_cotroller'
+=======
+      - build_result:
+          groups:
+            - jobs:
+               - '{lab}-prepare_cotroller'
+>>>>>>> 19aa703... Separate 2 jobs
 
 - job-template:
     name: '{lab}-prepare_controller'
