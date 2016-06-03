@@ -10,8 +10,9 @@
             - success: true
             - not-built: true
             - aborted: true
-    triggers:
-      - jobs: '{lab}-{mos}-deploy'
+      - trigger:
+          project: '{lab}-{mos}-deploy'
+          threshold: SUCCESS
 
 - job-template:
     name: '{lab}-{mos}-deploy'
@@ -25,8 +26,9 @@
             - success: true
             - not-built: true
             - aborted: true
-    triggers:
-      - jobs: '{lab}-prepare_cotroller'
+      - trigger:
+           project: '{lab}-prepare_cotroller'
+           threshold: SUCCESS
 
 - job-template:
     name: '{lab}-prepare_controller'
