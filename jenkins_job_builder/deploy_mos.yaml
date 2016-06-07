@@ -42,6 +42,8 @@
             - success: true
             - not-built: true
             - aborted: true
+      - trigger:
+           project: '{lab}-prepare_images'
 
 - job-template:
     name: '{lab}-prepare_images'
