@@ -12,10 +12,17 @@ plugin=$(echo $JOB_NAME | awk -F '-' '{ print $3 }')
 case $plugin in
     ambari_2.3)
        template_image_prefix="ambari_2_1"
+       nova boot --image mirror --flavor m1.small --security-groups default --nic net-id=2c908c7f-4139-4d25-9a75-daea4ed9b603 mirror
+       ip=$(nova show mirror | grep 'admin_internal_net network' | awk '{print$5}')
+       port=$(neutron port-list | grep $ip | awk '{print$2}')
+       neutron floatingip-create --port-id $port admin_floating_net
+       hdp=http://$floating_ip/hdp/centos6/2.x/updates/2.3.4.7/
+       hdp_utils=http://$floating_ip/hdp-utils/repos/centos6/
+       sed -i '/cluster_configs:/a \ \ \ \ \ \ \ \ \general:\n \ \ \ \ \ \ \ \ \ \HDP: $hdp\n \ \ \ \ \ \ \ \ \ \HDP-UTILS: $hdp_utils' $SAHARA_TESTS_PATH/sahara_tests/scenario/defaults/ambari-2.3.yaml.mako
        ;;
     vanilla_2.7.1)
        template_image_prefix="vanilla_two_seven_one"
-    ;;
+       ;;
     transient)
        plugin=vanilla_2.7.1
        template_image_prefix="vanilla_two_seven_one"
