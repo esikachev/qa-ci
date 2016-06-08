@@ -67,4 +67,5 @@ sshpass -p $pass ssh $host -l $user ". openrc && openstack image create ambari_2
 sshpass -p $pass ssh $host -l $user ". openrc && openstack image create cdh_5.5.0 --file mitaka/sahara-mitaka-cloudera-5.5.0-ubuntu.qcow2 --disk-format qcow2 --container-format bare --property '_sahara_tag_5.5.0'='True' --property '_sahara_tag_cdh'='True' --property '_sahara_username'='ubuntu'"
 sshpass -p $pass ssh $host -l $user ". openrc && openstack image create spark_1.6.0 --file mitaka/sahara-mitaka-spark-1.6.0-ubuntu.qcow2 --disk-format qcow2 --container-format bare --property '_sahara_tag_spark'='True' --property '_sahara_tag_1.6.0'='True'  --property '_sahara_username'='ubuntu'"
 sshpass -p $pass ssh $host -l $user ". openrc && openstack image create mapr_5.1.0.mrv2 --file mitaka/sahara-mitaka-mapr-5.1.0-ubuntu.qcow2 --disk-format qcow2 --container-format bare --property '_sahara_tag_mapr'='True' --property '_sahara_tag_5.1.0.mrv2'='True'  --property '_sahara_username'='ubuntu'"
+sshpass -p $pass ssh $host -l $user ". openrc && openstack image create mirror --file mitaka/centos_plain.qcow2 --disk-format qcow2 --container-format bare"
 }
