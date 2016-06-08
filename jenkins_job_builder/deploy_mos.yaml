@@ -67,5 +67,5 @@
     jobs:
       - '{lab}-{mos}-del_vms'
       - '{lab}-{mos}-deploy'
-      - '{lab}-prepare_controller'
+      - '{lab}-prepare_slaves'
       - '{lab}-prepare_images'
