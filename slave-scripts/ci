@@ -1,0 +1,15 @@
+OS_USERNAME="admin"
+OS_PASSWORD="admin"
+OS_TENANT_NAME="admin"
+
+host_ssh_user="root"
+host_ssh_password="r00tme"
+host_username="qa"
+host_ip="172.18.79.150"
+host_master_ip="10.20.0.2"
+
+controller_user="root"
+controller_password="r00tme"
+controller_ip="172.18.79.154"
+
+horizon_ip="172.18.79.153"
