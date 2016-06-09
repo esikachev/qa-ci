@@ -1,17 +1,16 @@
 #!/bin/bash -xe
 
+export JENKINS_HOME=/var/lib/jenkins
+. $JENKINS_HOME/ci_openrc
 write_tests_conf() {
   local cluster_name=$1
   local image_prefix=$2
   local image_name=$3
-  OS_USERNAME="admin"
-  OS_PASSWORD="admin"
-  OS_TENANT_NAME="admin"
   protocol="http"
   if [ "$SSL" == "true" ]; then
       protocol="https"
   fi
-  OS_AUTH_URL="$protocol://172.18.79.153:5000/v2.0"
+  OS_AUTH_URL="$protocol://$horizon_ip:5000/v2.0"
   NETWORK="neutron"
 echo "[DEFAULT]
 OS_USERNAME: $OS_USERNAME

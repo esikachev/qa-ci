@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/bin/bash -xe
 
+export JENKINS_HOME=/var/lib/jenkins
+. $JENKINS_HOME/ci_openrc
 . $FUNCTION_PATH/functions.sh
-ssh-keygen -R 172.18.79.154
-ssh 172.18.79.150 -l qa 'sshpass -p r00tme scp -o StrictHostKeyChecking=no -r mitaka root@172.18.79.154:'
-upload_images 172.18.79.154 root r00tme
+ssh-keygen -R $controller_ip
+ssh $host_ip -l $host_username 'sshpass -p $controller_password scp -o StrictHostKeyChecking=no -r mitaka $controller_username@$controller_ip:'
+upload_images $controller_ip $controller_username $controller_password
