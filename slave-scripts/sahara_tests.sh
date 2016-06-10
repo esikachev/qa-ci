@@ -19,12 +19,8 @@ case $plugin in
        sshpass -p $controller_password ssh $controller_username@$controller_ip ". openrc && neutron floatingip-create --port-id $port admin_floating_net"
        hdp=http://$ip/hdp/centos6/2.x/updates/2.3.4.7/
        hdp_utils=http://$ip/hdp-utils/repos/centos6/
-<<<<<<< HEAD
-       sed -i '/cluster_configs:/a \ \ \ \ \ \ \ \ \general:\n \ \ \ \ \ \ \ \ \ \ \\HDP: $hdp\n \ \ \ \ \ \ \ \ \ \HDP-UTILS: $hdp_utils' $SAHARA_TESTS_PATH/sahara_tests/scenario/defaults/ambari-2.3.yaml.mako
-=======
        sed -i '/cluster_configs:/a \ \ \ \ \ \ \ \ \general:\n \ \ \ \ \ \ \ \ \ HDP: $hdp\n \ \ \ \ \ \ \ \ \ \HDP-UTILS: $hdp_utils' $SAHARA_TESTS_PATH/sahara_tests/scenario/defaults/ambari-2.3.yaml.mako
        sshpass -p $controller_password ssh $controller_username@$controller_ip ". openrc && nova delete mirror"
->>>>>>> f25e1c6... Update security information
        ;;
     vanilla_2.7.1)
        template_image_prefix="vanilla_two_seven_one"
