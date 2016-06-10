@@ -19,7 +19,7 @@ case $plugin in
        sshpass -p $controller_password ssh $controller_username@$controller_ip ". openrc && neutron floatingip-create --port-id $port admin_floating_net"
        hdp=http://$ip/hdp/centos6/2.x/updates/2.3.4.7/
        hdp_utils=http://$ip/hdp-utils/repos/centos6/
-       sed -i '/cluster_configs:/a \ \ \ \ \ \ \ \ \general:\n \ \ \ \ \ \ \ \ \ HDP repo URL: $hdp\n \ \ \ \ \ \ \ \ \ \HDP-UTILS repo URL: $hdp_utils' $SAHARA_TESTS_PATH/sahara_tests/scenario/defaults/ambari-2.3.yaml.mako
+       sed -i "/cluster_configs:/a \ \ \ \ \ \ \ \ \general:\n \ \ \ \ \ \ \ \ \ HDP repo URL: $hdp\n \ \ \ \ \ \ \ \ \ \HDP-UTILS repo URL: $hdp_utils" $SAHARA_TESTS_PATH/sahara_tests/scenario/defaults/ambari-2.3.yaml.mako
        ;;
     vanilla_2.7.1)
        template_image_prefix="vanilla_two_seven_one"
