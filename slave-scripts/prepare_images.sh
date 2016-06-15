@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 
-. /var/lib/jenkins/credentialss
+. /var/lib/jenkins/credentials
 
 . $FUNCTION_PATH/functions.sh
 ssh-keygen -R $controller_ip
