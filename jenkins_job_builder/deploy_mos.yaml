@@ -33,9 +33,7 @@
     defaults: global
     builders:
       - ci-config-prep
-      - shell: |
-              scp $WORKSPACE/qa-ci/slave-scripts/prepare_slaves.sh qa@172.18.79.150:
-              ssh 172.18.79.150 -l qa './prepare_slaves.sh'
+      - shell: bash $WORKSPACE/qa-ci/slave-scripts/prepare_slaves.sh
     publishers:
       - workspace-cleanup:
           clean-if:
