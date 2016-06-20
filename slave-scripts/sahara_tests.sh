@@ -18,8 +18,9 @@ case $plugin in
        ip=$(sshpass -p $controller_password ssh $controller_username@$controller_ip ". openrc && nova show mirror | grep 'admin_internal_net network' | awk '{print\$5}'")
        port=$(sshpass -p $controller_password ssh $controller_username@$controller_ip ". openrc && neutron port-list | grep $ip | awk '{print\$2}'")
        sshpass -p $controller_password ssh $controller_username@$controller_ip ". openrc && neutron floatingip-create --port-id $port admin_floating_net"
-       hdp=http://$ip/hdp/centos6/2.x/updates/2.3.4.7/
-       hdp_utils=http://$ip/hdp-utils/repos/centos6/
+       new_ip=$(sshpass -p $controller_password ssh $controller_username@$controller_ip ". openrc && neutron floatingip-list | grep '$ip' | awk '{print\$6}'")
+       hdp=http://$new_ip/hdp/centos6/2.x/updates/2.3.4.7/
+       hdp_utils=http://$new_ip/hdp-utils/repos/centos6/
        sed -i "/cluster_configs:/a \ \ \ \ \ \ \ \ \general:\n \ \ \ \ \ \ \ \ \ HDP repo URL: $hdp\n \ \ \ \ \ \ \ \ \ \HDP-UTILS repo URL: $hdp_utils" $SAHARA_TESTS_PATH/sahara_tests/scenario/defaults/ambari-2.3.yaml.mako
        ;;
     vanilla_2.7.1)
