@@ -13,7 +13,8 @@ plugin=$(echo $JOB_NAME | awk -F '-' '{ print $3 }')
 case $plugin in
     ambari_2.3)
        template_image_prefix="ambari_2_1"
-       sshpass -p $controller_password ssh $controller_username@$controller_ip ". openrc && nova boot --image mirror --flavor m1.small --security-groups default --nic net-id=2c908c7f-4139-4d25-9a75-daea4ed9b603 mirror"
+       nic_net=$(sshpass -p $controller_password ssh $controller_username@$controller_ip ". openrc && neutron net-list | grep 'admin_internal_net' | awk '{print\$2}'")
+       sshpass -p $controller_password ssh $controller_username@$controller_ip ". openrc && nova boot --image mirror --flavor m1.small --security-groups default --nic net-id=$nic_net mirror"
        ip=$(sshpass -p $controller_password ssh $controller_username@$controller_ip ". openrc && nova show mirror | grep 'admin_internal_net network' | awk '{print\$5}'")
        port=$(sshpass -p $controller_password ssh $controller_username@$controller_ip ". openrc && neutron port-list | grep $ip | awk '{print\$2}'")
        sshpass -p $controller_password ssh $controller_username@$controller_ip ". openrc && neutron floatingip-create --port-id $port admin_floating_net"
