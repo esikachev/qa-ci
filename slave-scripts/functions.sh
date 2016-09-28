@@ -13,10 +13,6 @@ write_tests_conf() {
   OS_AUTH_URL="$protocol://$horizon_ip:5000/v2.0"
   NETWORK="neutron"
 echo "[DEFAULT]
-OS_USERNAME: $OS_USERNAME
-OS_PASSWORD: $OS_PASSWORD
-OS_TENANT_NAME: $OS_TENANT_NAME
-OS_AUTH_URL: $OS_AUTH_URL
 network_type: $NETWORK
 network_public_name: admin_floating_net
 network_private_name: admin_internal_net
@@ -44,7 +40,7 @@ run_tests() {
   
   pushd $SAHARA_TESTS_PATH
   
-  tox -e venv -- sahara-scenario --verbose -V $template_vars_file -p $params | tee tox.log
+  tox -e venv -- sahara-scenario --verbose -V $template_vars_file -p $params --release mitaka| tee tox.log
   STATUS=$(grep "\ -\ Failed" tox.log | awk '{print $3}')
   if [ "$STATUS" != "0" ]; then failure "Integration tests have failed"; fi
   popd
