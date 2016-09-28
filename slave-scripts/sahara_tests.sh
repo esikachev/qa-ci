@@ -3,6 +3,7 @@
 . $FUNCTION_PATH/functions.sh
 
 . /var/lib/jenkins/credentials
+. /var/lib/jenkins/openrc
 export SAHARA_TESTS_PATH=$WORKSPACE/sahara-tests
 get_dependency "$SAHARA_TESTS_PATH" "openstack/sahara-tests" "master"
 template_vars_file=$WORKSPACE/sahara-tests/template_vars.ini
